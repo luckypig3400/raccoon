@@ -1,15 +1,15 @@
+<style>
+  .alert{position:relative;padding:.75rem 1.25rem;margin-bottom:1rem;border:1px solid transparent;border-radius:.25rem}.alert-heading{color:inherit}.alert-link{font-weight:700}.alert-dismissible{padding-right:4rem}.alert-dismissible .close{position:absolute;top:0;right:0;padding:.75rem 1.25rem;color:inherit}.alert-primary{color:#004085;background-color:#cce5ff;border-color:#b8daff}.alert-primary hr{border-top-color:#9fcdff}.alert-primary .alert-link{color:#002752}.alert-secondary{color:#383d41;background-color:#e2e3e5;border-color:#d6d8db}.alert-secondary hr{border-top-color:#c8cbcf}.alert-secondary .alert-link{color:#202326}.alert-success{color:#155724;background-color:#d4edda;border-color:#c3e6cb}.alert-success hr{border-top-color:#b1dfbb}.alert-success .alert-link{color:#0b2e13}.alert-info{color:#0c5460;background-color:#d1ecf1;border-color:#bee5eb}.alert-info hr{border-top-color:#abdde5}.alert-info .alert-link{color:#062c33}.alert-warning{color:#856404;background-color:#fff3cd;border-color:#ffeeba}.alert-warning hr{border-top-color:#ffe8a1}.alert-warning .alert-link{color:#533f03}.alert-danger{color:#721c24;background-color:#f8d7da;border-color:#f5c6cb}.alert-danger hr{border-top-color:#f1b0b7}.alert-danger .alert-link{color:#491217}.alert-light{color:#818182;background-color:#fefefe;border-color:#fdfdfe}.alert-light hr{border-top-color:#ececf6}.alert-light .alert-link{color:#686868}.alert-dark{color:#1b1e21;background-color:#d6d8d9;border-color:#c6c8ca}.alert-dark hr{border-top-color:#b9bbbe}.alert-dark .alert-link{color:#040505}
+</style>
+
 <div> 
   <div style="float: left;width: 15%;"><img src="https://repository-images.githubusercontent.com/314441601/8e680180-33da-11eb-8da5-266f5636f213" width="90px"></div>
   <div style="float: left;width: 85%;"><h1>Raccoon - Web-based DICOMWeb & FHIR ImagingStudy Server</h1> 
 </div>
 
-[English](README.md) | [繁體中文](README.zh-TW.md)
+**Raccoon** is a noSQL-based medical image archive for managing the DICOM images is primarily maintained by the [Imaging Informatics Labs](https://cylab.dicom.tw). It uses the MongoDB to manage the DICOM images and provide RESTful API, supported both FHIR ImagingStudy and [DICOMweb](https://www.dicomstandard.org/dicomweb/") to store, query/retrieve, and manage DICOM images.  Raccoon is bulit on the top of the [Burni FHIR Server](https://github.com/Chinlinlee/Burni) to manage the FHIR resourcs related to medical images 
 
 ---
-**Raccoon** is a noSQL-based medical image archive designed for managing DICOM images, utilizing MongoDB to store and manage the images while providing RESTful APIs that support both FHIR ImagingStudy and [DICOMweb](https://www.dicomstandard.org/dicomweb/") protocols for querying, retrieving, and managing DICOM images. Built on top of the <a href="[https://github.com/cylab-tw/bluelight/](https://github.com/Chinlinlee/Burni)">Burni</a>, Raccoon manages FHIR resources related to medical images.<br><br>
-This project is maintained by DICOM experts from wholeworld and primarily managed by the [Imaging Informatics Lab](https://cylab.dicom.tw).
----
-
 ## Installation
 * Before starting Raccoon, MongoDB, imagemagick must be installed.
 * This project uses the submodule with <a href="https://github.com/cylab-tw/bluelight/">BlueLight</a> for DICOM viewer. If you want to use it, run `git submodule init` and `git submodule update` when the first time.
@@ -17,33 +17,38 @@ This project is maintained by DICOM experts from wholeworld and primarily manage
 * Python >= 3.7
 ### Windows
 
+<div class="alert alert-warning" role="alert">
+You can follow this <a href="https://chinlinlee.github.io/po2Aka.html">Full Installation Guide</a> 🎉 <br>
+The guide above has every detailed installation step for each required software <br>
+😄 <b>It's extremely friendly for newbie</b> 😄
+</div>
+
 #### Test OS
 - Windows 10 64bits
 #### requirement
-- [**MongoDB**](https://www.mongodb.com/try/download/community) >= 4.0
-- **Anaconda** (Optional)
-- **GDCM environment in Anaconda** (Required when you use Anaconda)
+- [**MongoDB**](https://www.mongodb.com/try/download/community) > 4.0
+- **Anaconda**
+- **GDCM enviroment in Anaconda**
 - **[imagemagick](https://imagemagick.org/script/download.php)**
 #### Install dependencies
 - Go to project root path and run:
 ```bash
 npm install
 npm run build #This will download dcmtk executable binaries to ./models/dcmtk and generate example dotenv file.
-pip install -r requirements.txt #Install Python Dependencies
 ```
 
-> 💙💙💙 <br>
-> Windows installation ends here, scroll down to see <br>
-> <a href="#configuration">Configuration</a> & <a href="#deploy">Deploy</a> guide
+<div class="alert alert-primary" role="alert">
+Windows installation ends here, scroll down to see <a href="#configuration">Configuration</a> & <a href="#deploy">Deploy</a> guide
+</div>
 
 ### Linux
 #### Test OS
-- Ubuntu v21.10
+- Ubuntu v20.4
 #### requirement
-- [**MongoDB**](https://www.mongodb.com/try/download/community) >= 4.0
+- [**MongoDB**](https://www.mongodb.com/try/download/community) > 4.0
 - **GDCM**
 >```bash
->sudo apt-get install python3-gdcm libgdcm3.0
+>sudo api-get install python3-gdcm libgdcm3.0
 >```
 - imagemagick
 >```bash
@@ -52,24 +57,9 @@ pip install -r requirements.txt #Install Python Dependencies
 #### Install dependencies
 - Go to project root path and run:
 ```bash
-sudo apt-get install dcmtk
 npm install
-pip install -r requirements.txt #Install Python Dependencies
+npm run build #This will download dcmtk using apt-get install and generate example dotenv file.
 ```
-#### Troubleshooting
-- `Unknown VR: Tag not found in data dictionary` when using `STOW-RS`
-    - You need set the `DCMDICTPATH` environment variable
-    - The `dicom.dic` can find in the `/usr/share/libdcmtk{version}`
-    > The {version} corresponds to dcmtk version, e.g. 3.6.5 => libdcmtk15
-
-    - Set `DCMDICTPATH` environment variable using command or you can add the command to profile file(`~/.bashrc`,`~/.profile` etc.), example **with dcmtk 3.6.5**:
-    ```sh
-    export DCMDICTPATH=/usr/share/libdcmtk15/dicom.dic
-    ```
-    - Check the environment variable
-    ```sh
-    echo $DCMDICTPATH
-    ```
 
 ---
 
@@ -106,8 +96,9 @@ CONDA_PATH="C:\\Users\\chinHPlaptop\\anaconda3\\Scripts\\conda.exe"
 CONDA_GDCM_ENV_NAME="gdcm"
 
 USE_DCM2JPEG_PYTHONAPI=true
-DCM2JPEG_PYTHONAPI_HOST="127.0.0.1"
 DCM2JPEG_PYTHONAPI_PORT=5000
+
+ENABLE_LOGIN_ACCESS=false
 ```
 
 ### Client Configuration
@@ -132,26 +123,11 @@ var envConfig = {
         port : '9090' , 
         api : 'api/fhir' , 
         http : "http"
-    },
-    login: {
-        enable: false, // enable login or not
-        jwt: false // enable for storing token, checking token from backend, and login by token
-    },
-    backend: {
-        baseUrl: "http://localhost:8081" // The base url of login backend (Raccoon)
     }
 }
 ```
 * A simple web-based user interface is provided to manage the DICOM objects in Raccoon.
 * For DICOMWeb client, Raccoon can integrate with <a href="https://github.com/cylab-tw/bluelight/">BlueLight</a>, a lightweight Web-based DICOM Viewer.
-
-### Plugins Configuration
-Raccoon has some plugins such as OAuth, username/password login etc.
-- Please see [Plugins Configuration](plugins/README.md)
-> **Note**
->
-> If you don't want to use plugins, just copy `plugins/config.template.js` and rename to `plugins/config.js`
-
 
 ## Deploy
 ### With Node.JS
