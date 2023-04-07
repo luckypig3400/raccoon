@@ -3,6 +3,7 @@ dicom_image/
 mongodb
 raccoon-null
 raccoon-storage
+dicomFiles
 DicomFolder_Medium/
 data/
 mongoquery.js
