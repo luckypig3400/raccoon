@@ -1,5 +1,8 @@
 node_modules/
 dicom_image/
+mongodb
+raccoon-null
+raccoon-storage
 DicomFolder_Medium/
 data/
 mongoquery.js
