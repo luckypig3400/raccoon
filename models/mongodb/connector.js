@@ -24,7 +24,7 @@ module.exports = exports = function (config) {
             databaseUrl += `,${host}:${ports[index]}`;
         }
     });
-    databaseUrl += `/${dbName}`;
+    databaseUrl += `/${dbName}?directConnection=true`;
 
     console.log(databaseUrl);
     mongoose.connect(databaseUrl, {
