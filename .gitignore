@@ -1,6 +1,7 @@
 node_modules/
 dicom_image/
 mongodb
+MongoData
 raccoon-null
 raccoon-storage
 dicomFiles
